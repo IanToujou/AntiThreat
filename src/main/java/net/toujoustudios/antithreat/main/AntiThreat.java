@@ -3,8 +3,10 @@ package net.toujoustudios.antithreat.main;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
+import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.toujoustudios.antithreat.config.Config;
+import net.toujoustudios.antithreat.listener.GuildMessageReceivedListener;
 import net.toujoustudios.antithreat.log.LogLevel;
 import net.toujoustudios.antithreat.log.Logger;
 
@@ -30,10 +32,11 @@ public class AntiThreat {
         builder = JDABuilder.createDefault(keysConfig.getString("keys.token"));
 
         builder.setBulkDeleteSplittingEnabled(false);
-        builder.setActivity(Activity.streaming("/help - Running " + config.getString("general.name") + " " + config.getString("general.version"), "https://twitch.tv/iantoujou"));
+        builder.setActivity(Activity.streaming("Running " + config.getString("general.name") + " " + config.getString("general.version"), "https://twitch.tv/iantoujou"));
 
         builder.enableIntents(GatewayIntent.GUILD_MEMBERS);
         builder.enableIntents(GatewayIntent.GUILD_PRESENCES);
+        builder.addEventListeners(new GuildMessageReceivedListener());
 
     }
 
