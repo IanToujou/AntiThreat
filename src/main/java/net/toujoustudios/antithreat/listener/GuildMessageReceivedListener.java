@@ -1,6 +1,5 @@
 package net.toujoustudios.antithreat.listener;
 
-import com.mysql.cj.x.protobuf.Mysqlx;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.User;
@@ -14,8 +13,6 @@ import net.toujoustudios.antithreat.main.Main;
 import net.toujoustudios.antithreat.util.ColorUtil;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnegative;
-import javax.annotation.Nonnull;
 import java.util.Arrays;
 import java.util.List;
 
