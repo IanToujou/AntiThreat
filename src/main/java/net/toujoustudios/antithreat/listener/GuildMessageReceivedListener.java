@@ -50,9 +50,9 @@ public class GuildMessageReceivedListener extends ListenerAdapter {
                     if (link.contains(site)) {
 
                         EmbedBuilder embedBuilder = new EmbedBuilder();
+                        embedBuilder.setColor(ColorUtil.getFromRGBString(config.getString("format.color.default")));
 
                         if(PermissionUtil.checkPermission(event.getChannel(), event.getGuild().getSelfMember(), Permission.MESSAGE_MANAGE)) {
-                            embedBuilder.setColor(ColorUtil.getFromRGBString(config.getString("format.color.default")));
                             embedBuilder.setTitle(":warning: **Message Deleted**");
                             embedBuilder.setDescription("Your message has been deleted for the following reason:\n`Potentially malicious or dangerous links.`\n\n*This message has been logged and reported to administrators.*");
                             event.getMessage().delete().queue();
