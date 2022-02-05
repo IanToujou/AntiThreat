@@ -29,7 +29,7 @@ public class GuildMessageReceivedListener extends ListenerAdapter {
 
     private final Config config = Config.getDefault();
     private final List<String> blacklistedWords = List.of("nitro", "nirto", "nitr0", "n1tro", "discrd", "d1scord", "disc0rd");
-    private final List<String> whitelistedSites = List.of("discord.com", "discord.gift", "discord.gg", "tenor.com", "discordapp.net", "discordapp.com");
+    private final List<String> whitelistedSites = List.of("discord.com", "discord.gift", "discord.gg", "tenor.com", "discordapp.net", "discordapp.com", "nitro.com");
 
     @Override
     public void onGuildMessageReceived(@NotNull GuildMessageReceivedEvent event) {
