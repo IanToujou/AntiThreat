@@ -9,6 +9,8 @@ import net.dv8tion.jda.internal.utils.PermissionUtil;
 import net.toujoustudios.antithreat.config.Config;
 import net.toujoustudios.antithreat.error.ErrorEmbed;
 import net.toujoustudios.antithreat.error.ErrorType;
+import net.toujoustudios.antithreat.log.LogLevel;
+import net.toujoustudios.antithreat.log.Logger;
 import net.toujoustudios.antithreat.main.Main;
 import net.toujoustudios.antithreat.util.ColorUtil;
 import org.jetbrains.annotations.NotNull;
@@ -48,13 +50,16 @@ public class GuildMessageReceivedListener extends ListenerAdapter {
 
                         EmbedBuilder embedBuilder = new EmbedBuilder();
                         embedBuilder.setColor(ColorUtil.getFromRGBString(config.getString("format.color.default")));
+                        Logger.log(LogLevel.WARNING, "A scam message has been detected. Attempting deletion...");
 
-                        if(PermissionUtil.checkPermission(event.getChannel(), event.getGuild().getSelfMember(), Permission.MESSAGE_MANAGE)) {
+                        if (PermissionUtil.checkPermission(event.getChannel(), event.getGuild().getSelfMember(), Permission.MESSAGE_MANAGE)) {
                             embedBuilder.setTitle(":warning: **Message Deleted**");
                             embedBuilder.setDescription("Your message has been deleted for the following reason:\n`Potentially malicious or dangerous links.`\n\n*This message has been logged and reported to administrators.*");
                             event.getMessage().delete().queue();
                             event.getChannel().sendMessage(embedBuilder.build()).queue();
+                            Logger.log(LogLevel.INFORMATION, "Successfully removed the scam message.");
                         } else {
+                            Logger.log(LogLevel.ERROR, "Could not delete the scam message due to insufficient permissions.");
                             ErrorEmbed.sendError(event.getChannel(), ErrorType.PERMISSION_MESSAGE_MANAGE);
                         }
 
