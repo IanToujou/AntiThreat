@@ -60,7 +60,7 @@ public class GuildMessageReceivedListener extends ListenerAdapter {
                             Logger.log(LogLevel.INFORMATION, "Successfully removed the scam message.");
                         } else {
                             Logger.log(LogLevel.ERROR, "Could not delete the scam message due to insufficient permissions.");
-                            ErrorEmbed.sendError(event.getChannel(), ErrorType.PERMISSION_MESSAGE_MANAGE);
+                            ErrorEmbed.sendError(event.getChannel(), ErrorType.PERMISSION_MANAGE_MESSAGES);
                         }
 
                         embedBuilder.setTitle(":warning: **Scam Link Detection:**");
