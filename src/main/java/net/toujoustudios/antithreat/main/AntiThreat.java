@@ -47,6 +47,7 @@ public class AntiThreat {
     public void start() {
         try {
             jda = builder.build();
+            commandManager.registerCommands();
             startConsole();
         } catch (LoginException exception) {
             exception.printStackTrace();
