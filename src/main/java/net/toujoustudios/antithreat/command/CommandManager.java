@@ -5,6 +5,7 @@ import net.dv8tion.jda.api.interactions.commands.OptionMapping;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import net.dv8tion.jda.api.requests.restaction.CommandListUpdateAction;
+import net.toujoustudios.antithreat.command.list.general.HelpCommand;
 import net.toujoustudios.antithreat.log.LogLevel;
 import net.toujoustudios.antithreat.log.Logger;
 import net.toujoustudios.antithreat.main.Main;
@@ -21,9 +22,16 @@ import java.util.List;
  */
 public class CommandManager {
 
+    private static CommandManager instance;
     private final List<ICommand> commands = new ArrayList<>();
 
     public CommandManager() {
+
+        instance = this;
+
+        //General commands
+        this.addCommand(new HelpCommand(this));
+
     }
 
     private void addCommand(ICommand command) {
@@ -40,24 +48,9 @@ public class CommandManager {
         List<CommandData> commands = new ArrayList<>();
 
         for (ICommand command : this.commands) {
-
-            Logger.log(LogLevel.DEBUG, "--------------------------------------------------");
-            Logger.log(LogLevel.DEBUG, "Started registration of a new command. More information below:");
-            Logger.log(LogLevel.DEBUG, "Name: " + command.getName());
-            Logger.log(LogLevel.DEBUG, "Description: " + command.getDescription());
-            Logger.log(LogLevel.DEBUG, "Syntax: " + command.getSyntax());
-            Logger.log(LogLevel.DEBUG, "Options:");
-            for (OptionData option : command.getOptions()) {
-                Logger.log(LogLevel.DEBUG, "| Option Name: " + option.getName());
-                Logger.log(LogLevel.DEBUG, "| Option Description: " + option.getDescription());
-                Logger.log(LogLevel.DEBUG, "| Option Type: " + option.getType());
-                Logger.log(LogLevel.DEBUG, "| Option Required: " + option.isRequired());
-            }
-            Logger.log(LogLevel.DEBUG, "--------------------------------------------------");
-
+            Logger.log(LogLevel.DEBUG, "Started registration of the following commands: /" + command.getName());
             CommandData data = new CommandData(command.getName(), command.getDescription()).addOptions(command.getOptions());
             commands.add(data);
-
         }
 
         updateAction.addCommands(commands).queue();

@@ -4,8 +4,10 @@ import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.requests.GatewayIntent;
+import net.toujoustudios.antithreat.command.CommandManager;
 import net.toujoustudios.antithreat.config.Config;
 import net.toujoustudios.antithreat.listener.GuildMessageReceivedListener;
+import net.toujoustudios.antithreat.listener.SlashCommandListener;
 import net.toujoustudios.antithreat.log.LogLevel;
 import net.toujoustudios.antithreat.log.Logger;
 
@@ -22,11 +24,13 @@ public class AntiThreat {
 
     private JDABuilder builder;
     private JDA jda;
+    private CommandManager commandManager;
 
     public void build() {
 
         Config config = Config.getDefault();
         Config keysConfig = Config.getFile("keys.yml");
+        commandManager = new CommandManager();
 
         builder = JDABuilder.createDefault(keysConfig.getString("keys.token"));
 
@@ -36,6 +40,7 @@ public class AntiThreat {
         builder.enableIntents(GatewayIntent.GUILD_MEMBERS);
         builder.enableIntents(GatewayIntent.GUILD_PRESENCES);
         builder.addEventListeners(new GuildMessageReceivedListener());
+        builder.addEventListeners(new SlashCommandListener());
 
     }
 
@@ -70,6 +75,10 @@ public class AntiThreat {
 
     public JDA getJDA() {
         return jda;
+    }
+
+    public CommandManager getCommandManager() {
+        return commandManager;
     }
 
 }
