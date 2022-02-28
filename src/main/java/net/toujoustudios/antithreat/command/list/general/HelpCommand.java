@@ -13,8 +13,6 @@ import net.toujoustudios.antithreat.command.ICommand;
 import net.toujoustudios.antithreat.config.Config;
 import net.toujoustudios.antithreat.error.ErrorEmbed;
 import net.toujoustudios.antithreat.error.ErrorType;
-import net.toujoustudios.antithreat.log.LogLevel;
-import net.toujoustudios.antithreat.log.Logger;
 import net.toujoustudios.antithreat.util.ColorUtil;
 
 import java.util.ArrayList;

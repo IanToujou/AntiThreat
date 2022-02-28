@@ -56,7 +56,7 @@ public class GuildMessageReceivedListener extends ListenerAdapter {
                             embedBuilder.setTitle(":warning: **Message Deleted**");
                             embedBuilder.setDescription("Your message has been deleted for the following reason:\n`Potentially malicious or dangerous links.`\n\n*This message has been logged and reported to administrators.*");
                             event.getMessage().delete().queue();
-                            event.getChannel().sendMessage(embedBuilder.build()).queue();
+                            event.getChannel().sendMessageEmbeds(embedBuilder.build()).queue();
                             Logger.log(LogLevel.INFORMATION, "Successfully removed the scam message.");
                         } else {
                             Logger.log(LogLevel.ERROR, "Could not delete the scam message due to insufficient permissions.");
@@ -67,7 +67,7 @@ public class GuildMessageReceivedListener extends ListenerAdapter {
                         embedBuilder.setDescription("A message was flagged as scam and removed from a server.```" + rawMessage + "```");
                         User user = Main.getBot().getJDA().getUserById(config.getString("user.admin"));
                         if (user != null)
-                            user.openPrivateChannel().flatMap(channel -> channel.sendMessage(embedBuilder.build())).queue();
+                            user.openPrivateChannel().flatMap(channel -> channel.sendMessageEmbeds(embedBuilder.build())).queue();
                         return;
 
                     }

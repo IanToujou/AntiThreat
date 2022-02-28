@@ -32,7 +32,7 @@ public class ErrorEmbed {
     }
 
     public static void sendError(TextChannel channel, ErrorType type) {
-        channel.sendMessage(buildError(type)).queue();
+        channel.sendMessageEmbeds(buildError(type)).queue();
     }
 
 }
