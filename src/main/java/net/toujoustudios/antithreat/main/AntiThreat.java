@@ -64,6 +64,8 @@ public class AntiThreat {
             if (input.startsWith("shutdown")) {
                 Logger.log(LogLevel.INFORMATION, "Successfully saved all data in the cache.");
                 System.exit(0);
+            } else {
+                Logger.log(LogLevel.ERROR, "The specified command does not exist.");
             }
 
         }
