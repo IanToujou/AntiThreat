@@ -5,7 +5,9 @@ import net.toujoustudios.antithreat.log.Logger;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.*;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * This file has been created by Ian Toujou.
@@ -83,6 +85,12 @@ public class Config {
 
     public boolean getBoolean(String key) {
         return (boolean) content.getOrDefault(key, false);
+    }
+
+    public List<String> getStringList(String key) {
+        String[] stringArray = getString(key).split(", ");
+        if (stringArray.length >= 1) return Arrays.asList(stringArray);
+        else return null;
     }
 
 }
