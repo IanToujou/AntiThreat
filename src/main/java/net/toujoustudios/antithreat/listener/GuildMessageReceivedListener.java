@@ -1,5 +1,6 @@
 package net.toujoustudios.antithreat.listener;
 
+import com.mysql.cj.log.Log;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.User;
@@ -27,8 +28,9 @@ import java.util.List;
 public class GuildMessageReceivedListener extends ListenerAdapter {
 
     private final Config config = Config.getDefault();
-    private final List<String> blacklistedWords = List.of("nitro", "nirto", "nitr0", "n1tro", "discrd", "d1scord", "disc0rd");
-    private final List<String> whitelistedSites = List.of("discord.com", "discord.gift", "discord.gg", "tenor.com", "discordapp.net", "discordapp.com", "nitro.com");
+    private final List<String> blacklistedWords = Config.getDefault().getStringList("phishing.blacklist.words");
+    private final List<String> blacklistedSites = Config.getDefault().getStringList("phishing.blacklist.sites");
+    private final List<String> whitelistedSites = Config.getDefault().getStringList("phishing.whitelist.sites");
 
     @Override
     public void onGuildMessageReceived(@NotNull GuildMessageReceivedEvent event) {
@@ -43,6 +45,9 @@ public class GuildMessageReceivedListener extends ListenerAdapter {
 
             for (String link : linksFound) {
 
+                Logger.log(LogLevel.DEBUG, "New link found to scan. (" + link +")");
+
+                //Bypass security checks for the whitelisted sites.
                 for (String site : whitelistedSites) if (link.contains(site)) return;
 
                 for (String site : blacklistedWords) {
@@ -72,6 +77,35 @@ public class GuildMessageReceivedListener extends ListenerAdapter {
 
                     }
                 }
+
+                for (String site : blacklistedSites) {
+                    if (link.startsWith(site)) {
+
+                        EmbedBuilder embedBuilder = new EmbedBuilder();
+                        embedBuilder.setColor(ColorUtil.getFromRGBString(config.getString("format.color.default")));
+                        Logger.log(LogLevel.WARNING, "A scam message has been detected. Attempting deletion...");
+
+                        if (PermissionUtil.checkPermission(event.getChannel(), event.getGuild().getSelfMember(), Permission.MESSAGE_MANAGE)) {
+                            embedBuilder.setTitle(":warning: **Message Deleted**");
+                            embedBuilder.setDescription("Your message has been deleted for the following reason:\n`Potentially malicious or dangerous links.`\n\n*This message has been logged and reported to administrators.*");
+                            event.getMessage().delete().queue();
+                            event.getChannel().sendMessageEmbeds(embedBuilder.build()).queue();
+                            Logger.log(LogLevel.INFORMATION, "Successfully removed the scam message.");
+                        } else {
+                            Logger.log(LogLevel.ERROR, "Could not delete the scam message due to insufficient permissions.");
+                            ErrorEmbed.sendError(event.getChannel(), ErrorType.PERMISSION_MANAGE_MESSAGES);
+                        }
+
+                        embedBuilder.setTitle(":warning: **Scam Link Detection:**");
+                        embedBuilder.setDescription("A message was flagged as scam and removed from a server.```" + rawMessage + "```");
+                        User user = Main.getBot().getJDA().getUserById(config.getString("user.admin"));
+                        if (user != null)
+                            user.openPrivateChannel().flatMap(channel -> channel.sendMessageEmbeds(embedBuilder.build())).queue();
+                        return;
+
+                    }
+                }
+
             }
 
         }
