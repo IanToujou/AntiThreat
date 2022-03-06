@@ -79,7 +79,7 @@ public class GuildMessageReceivedListener extends ListenerAdapter {
                 }
 
                 for (String site : blacklistedSites) {
-                    if (link.startsWith(site)) {
+                    if (link.startsWith("http://" + site) || link.startsWith("https://" + site)) {
 
                         EmbedBuilder embedBuilder = new EmbedBuilder();
                         embedBuilder.setColor(ColorUtil.getFromRGBString(config.getString("format.color.default")));
