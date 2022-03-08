@@ -48,7 +48,7 @@ public class GuildMessageReceivedListener extends ListenerAdapter {
                 Logger.log(LogLevel.DEBUG, "New link found to scan. (" + link +")");
 
                 //Bypass security checks for the whitelisted sites.
-                for (String site : whitelistedSites) if (link.contains(site)) return;
+                for (String site : whitelistedSites) if (link.startsWith("http://" + site) || link.startsWith("https://" + site)) return;
 
                 for (String site : blacklistedWords) {
                     if (link.contains(site)) {
