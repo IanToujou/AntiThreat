@@ -34,7 +34,7 @@ public class InfoCommand implements ICommand {
 
         embedBuilder.setColor(ColorUtil.getFromRGBString(config.getString("format.color.default")));
         embedBuilder.setTitle(":blue_heart: **AntiThreat Information**");
-        embedBuilder.setDescription("Here is all the information you need to know about the **AntiThreat Bot**");
+        embedBuilder.setDescription("Here is all the information you need to know about the **AntiThreat Bot**.");
         embedBuilder.addField(":information_source: Description:", "AntiThreat enhanced the security on your Discord server by blocking nitro phishing links!", false);
         embedBuilder.addField(":test_tube: Development:", "**GitHub:** https://github.com/IanToujou/AntiThreat\n**Credits:** Made by `Toujou Studios`", false);
         embedBuilder.setThumbnail(config.getString("assets.img.icon_information"));
@@ -49,7 +49,7 @@ public class InfoCommand implements ICommand {
 
     @Override
     public String getDescription() {
-        return "Get general information about the bot.";
+        return "💚 Get general information about the bot.";
     }
 
     @Override
