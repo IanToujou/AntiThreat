@@ -19,13 +19,11 @@ public interface ICommand {
 
     String getDescription();
 
+    String getEmoji();
+
     List<OptionData> getOptions();
 
     CommandCategory getCategory();
-
-    default List<String> getAliases() {
-        return Collections.emptyList();
-    }
 
     default String getSyntax() {
 

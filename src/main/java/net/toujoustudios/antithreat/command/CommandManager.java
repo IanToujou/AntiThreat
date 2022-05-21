@@ -50,7 +50,7 @@ public class CommandManager {
 
         for (ICommand command : this.commands) {
             Logger.log(LogLevel.DEBUG, "Started registration of the following commands: /" + command.getName());
-            CommandData data = new CommandData(command.getName(), command.getDescription()).addOptions(command.getOptions());
+            CommandData data = new CommandData(command.getName(), command.getEmoji() + " " + command.getDescription()).addOptions(command.getOptions());
             commands.add(data);
         }
 
@@ -69,7 +69,7 @@ public class CommandManager {
         String searchLower = search.toLowerCase();
 
         for (ICommand command : this.commands) {
-            if (command.getName().equals(searchLower) || command.getAliases().contains(searchLower)) return command;
+            if (command.getName().equals(searchLower)) return command;
         }
 
         return null;
