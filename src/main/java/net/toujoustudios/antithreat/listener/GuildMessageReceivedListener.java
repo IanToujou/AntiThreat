@@ -1,6 +1,5 @@
 package net.toujoustudios.antithreat.listener;
 
-import com.mysql.cj.log.Log;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.User;
@@ -45,10 +44,11 @@ public class GuildMessageReceivedListener extends ListenerAdapter {
 
             for (String link : linksFound) {
 
-                Logger.log(LogLevel.DEBUG, "New link found to scan. (" + link +")");
+                Logger.log(LogLevel.DEBUG, "New link found to scan. (" + link + ")");
 
                 //Bypass security checks for the whitelisted sites.
-                for (String site : whitelistedSites) if (link.startsWith("http://" + site) || link.startsWith("https://" + site)) return;
+                for (String site : whitelistedSites)
+                    if (link.startsWith("http://" + site) || link.startsWith("https://" + site)) return;
 
                 for (String site : blacklistedWords) {
                     if (link.contains(site)) {

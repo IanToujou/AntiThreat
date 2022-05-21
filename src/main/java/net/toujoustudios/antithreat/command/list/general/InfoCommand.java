@@ -3,6 +3,7 @@ package net.toujoustudios.antithreat.command.list.general;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.interactions.commands.OptionMapping;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
+import net.dv8tion.jda.api.interactions.components.Button;
 import net.toujoustudios.antithreat.command.CommandCategory;
 import net.toujoustudios.antithreat.command.CommandContext;
 import net.toujoustudios.antithreat.command.ICommand;
@@ -33,12 +34,12 @@ public class InfoCommand implements ICommand {
         EmbedBuilder embedBuilder = new EmbedBuilder();
 
         embedBuilder.setColor(ColorUtil.getFromRGBString(config.getString("format.color.default")));
-        embedBuilder.setTitle(":blue_heart: **AntiThreat Information**");
+        embedBuilder.setTitle(":green_heart: **AntiThreat Information**");
         embedBuilder.setDescription("Here is all the information you need to know about the **AntiThreat Bot**.");
         embedBuilder.addField(":information_source: Description:", "AntiThreat enhanced the security on your Discord server by blocking nitro phishing links!", false);
         embedBuilder.addField(":test_tube: Development:", "**GitHub:** https://github.com/IanToujou/AntiThreat\n**Credits:** Made by `Toujou Studios`", false);
         embedBuilder.setThumbnail(config.getString("assets.img.icon_information"));
-        context.getEvent().replyEmbeds(embedBuilder.build()).queue();
+        context.getEvent().replyEmbeds(embedBuilder.build()).addActionRow(Button.link(config.getString("link.invite"), "Invite")).queue();
 
     }
 
