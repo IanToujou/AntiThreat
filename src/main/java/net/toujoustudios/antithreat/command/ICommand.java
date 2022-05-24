@@ -2,7 +2,6 @@ package net.toujoustudios.antithreat.command;
 
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 
-import java.util.Collections;
 import java.util.List;
 
 /**

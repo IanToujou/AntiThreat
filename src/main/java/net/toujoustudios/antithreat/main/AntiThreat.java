@@ -6,6 +6,8 @@ import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.toujoustudios.antithreat.command.CommandManager;
 import net.toujoustudios.antithreat.config.Config;
+import net.toujoustudios.antithreat.database.DatabaseManager;
+import net.toujoustudios.antithreat.database.DatabaseTimer;
 import net.toujoustudios.antithreat.listener.GuildMessageReceivedListener;
 import net.toujoustudios.antithreat.listener.SlashCommandListener;
 import net.toujoustudios.antithreat.log.LogLevel;
@@ -13,6 +15,7 @@ import net.toujoustudios.antithreat.log.Logger;
 
 import javax.security.auth.login.LoginException;
 import java.util.Scanner;
+import java.util.Timer;
 
 /**
  * This file has been created by Ian Toujou.
@@ -52,6 +55,16 @@ public class AntiThreat {
         } catch (LoginException exception) {
             exception.printStackTrace();
         }
+    }
+
+    public void initializeDatabase() {
+
+        DatabaseManager.connect();
+        DatabaseTimer databaseTimer = new DatabaseTimer();
+        Timer timer = new Timer();
+        DatabaseManager.setup();
+        timer.schedule(databaseTimer, 3600000, 3600000);
+
     }
 
     public void startConsole() {
