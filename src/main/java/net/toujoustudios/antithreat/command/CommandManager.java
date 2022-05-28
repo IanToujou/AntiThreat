@@ -6,6 +6,7 @@ import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 import net.dv8tion.jda.api.requests.restaction.CommandListUpdateAction;
 import net.toujoustudios.antithreat.command.list.general.HelpCommand;
 import net.toujoustudios.antithreat.command.list.general.InfoCommand;
+import net.toujoustudios.antithreat.command.list.utils.ReportCommand;
 import net.toujoustudios.antithreat.log.LogLevel;
 import net.toujoustudios.antithreat.log.Logger;
 import net.toujoustudios.antithreat.main.Main;
@@ -32,6 +33,9 @@ public class CommandManager {
         //General commands
         this.addCommand(new HelpCommand(this));
         this.addCommand(new InfoCommand());
+
+        //Util commands
+        this.addCommand(new ReportCommand());
 
     }
 

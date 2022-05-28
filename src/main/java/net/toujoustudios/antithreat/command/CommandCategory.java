@@ -8,6 +8,6 @@ package net.toujoustudios.antithreat.command;
  */
 public enum CommandCategory {
 
-    GENERAL
+    GENERAL, UTILS
 
 }

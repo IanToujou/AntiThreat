@@ -37,6 +37,8 @@ public class InfoCommand implements ICommand {
         embedBuilder.setTitle(":green_heart: **AntiThreat Information**");
         embedBuilder.setDescription("Here is all the information you need to know about the **AntiThreat Bot**.");
         embedBuilder.addField(":information_source: Description:", "AntiThreat enhanced the security on your Discord server by blocking nitro phishing links!", false);
+        embedBuilder.addField(":warning: Disclaimer:", "AntiThreat is not affiliated with Discord in any way. This bot has been developed to collect malicious links and enhance your security when it comes to these links, especially phishing protection.", false);
+        embedBuilder.addField(":globe_with_meridians: Data Collection:", "This bot does not collect any data, except the links that have been marked as malicious or the links that have been reported. The server, user, and the message content (apart from the link) will not be saved.", false);
         embedBuilder.addField(":test_tube: Development:", "**GitHub:** https://github.com/IanToujou/AntiThreat\n**Credits:** Made by `Toujou Studios`", false);
         embedBuilder.setThumbnail(config.getString("assets.img.icon_information"));
         context.getEvent().replyEmbeds(embedBuilder.build()).addActionRow(Button.link(config.getString("link.invite"), "Invite")).queue();
