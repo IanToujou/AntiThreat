@@ -37,6 +37,7 @@ public class ReportCommand implements ICommand {
         String link = args.get(0).getAsString();
         if (!link.startsWith("http://") || !link.startsWith("https://")) {
             ErrorEmbed.sendError(context.getEvent(), ErrorType.COMMAND_INVALID_URL);
+            return;
         }
 
         embedBuilder.setTitle("**:triangular_flag_on_post: Report**");
