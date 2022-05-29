@@ -9,6 +9,7 @@ import net.toujoustudios.antithreat.command.CommandCategory;
 import net.toujoustudios.antithreat.command.CommandContext;
 import net.toujoustudios.antithreat.command.ICommand;
 import net.toujoustudios.antithreat.config.Config;
+import net.toujoustudios.antithreat.database.DatabaseManager;
 import net.toujoustudios.antithreat.error.ErrorEmbed;
 import net.toujoustudios.antithreat.error.ErrorType;
 import net.toujoustudios.antithreat.log.LogLevel;
