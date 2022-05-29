@@ -11,6 +11,8 @@ import net.toujoustudios.antithreat.command.ICommand;
 import net.toujoustudios.antithreat.config.Config;
 import net.toujoustudios.antithreat.error.ErrorEmbed;
 import net.toujoustudios.antithreat.error.ErrorType;
+import net.toujoustudios.antithreat.log.LogLevel;
+import net.toujoustudios.antithreat.log.Logger;
 import net.toujoustudios.antithreat.util.ColorUtil;
 import org.codehaus.plexus.classworlds.UrlUtils;
 
@@ -39,6 +41,8 @@ public class ReportCommand implements ICommand {
             ErrorEmbed.sendError(context.getEvent(), ErrorType.COMMAND_INVALID_URL);
             return;
         }
+
+        Logger.log(LogLevel.WARNING, "A new scam link has been reported: " + link);
 
         embedBuilder.setTitle("**:triangular_flag_on_post: Report**");
         embedBuilder.setDescription("The link has been successfully reported.");
