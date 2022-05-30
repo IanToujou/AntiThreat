@@ -84,7 +84,7 @@ public class DatabaseManager {
     }
 
     public static void setup() {
-        executeUpdate("CREATE TABLE IF NOT EXISTS link_data ( `link_id` INT NOT NULL , `link_content` VARCHAR(256) NOT NULL , `link_status` VARCHAR(256) NOT NULL DEFAULT 'UNVERIFIED', PRIMARY KEY (`link_id`)) ENGINE = InnoDB;");
+        executeUpdate("CREATE TABLE IF NOT EXISTS `link_data` ( `link_id` INT NOT NULL AUTO_INCREMENT , `content` VARCHAR(256) NOT NULL , `status` VARCHAR(256) NOT NULL DEFAULT 'NOT_VERIFIED' , PRIMARY KEY (`link_id`)) ENGINE = InnoDB;");
     }
 
 }
