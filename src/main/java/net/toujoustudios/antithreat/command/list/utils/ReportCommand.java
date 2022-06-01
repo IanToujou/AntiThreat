@@ -53,7 +53,11 @@ public class ReportCommand implements ICommand {
         boolean wasAdded = LinkDataManager.addLink(link);
 
         if (!wasAdded) {
-            ErrorEmbed.sendError(context.getEvent(), ErrorType.GENERAL_DATABASE);
+            embedBuilder.setTitle("**:triangular_flag_on_post: Report**");
+            embedBuilder.setDescription("The link is already present in the database. Thank you for reporting it though!");
+            embedBuilder.setThumbnail(config.getString("assets.img.icon_flag"));
+            embedBuilder.setColor(ColorUtil.getFromRGBString(config.getString("format.color.default")));
+            context.getEvent().replyEmbeds(embedBuilder.build()).setEphemeral(true).queue();
             return;
         }
 
