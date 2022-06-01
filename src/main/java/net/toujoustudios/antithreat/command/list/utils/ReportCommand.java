@@ -9,6 +9,7 @@ import net.toujoustudios.antithreat.command.CommandCategory;
 import net.toujoustudios.antithreat.command.CommandContext;
 import net.toujoustudios.antithreat.command.ICommand;
 import net.toujoustudios.antithreat.config.Config;
+import net.toujoustudios.antithreat.data.LinkDataManager;
 import net.toujoustudios.antithreat.database.DatabaseManager;
 import net.toujoustudios.antithreat.error.ErrorEmbed;
 import net.toujoustudios.antithreat.error.ErrorType;
@@ -44,9 +45,16 @@ public class ReportCommand implements ICommand {
         }
 
         Logger.log(LogLevel.WARNING, "A new scam link has been reported: " + link);
+        boolean wasAdded = LinkDataManager.addLink(link);
+
+        if(!wasAdded) {
+            ErrorEmbed.sendError(context.getEvent(), ErrorType.GENERAL_DATABASE);
+            return;
+        }
 
         embedBuilder.setTitle("**:triangular_flag_on_post: Report**");
         embedBuilder.setDescription("The link has been successfully reported.");
+        embedBuilder.setThumbnail(config.getString("assets.img.icon_flag"));
         embedBuilder.setColor(ColorUtil.getFromRGBString(config.getString("format.color.default")));
         context.getEvent().replyEmbeds(embedBuilder.build()).queue();
 
