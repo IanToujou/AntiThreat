@@ -18,6 +18,8 @@ import net.toujoustudios.antithreat.log.Logger;
 import net.toujoustudios.antithreat.util.ColorUtil;
 import org.codehaus.plexus.classworlds.UrlUtils;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,7 +41,10 @@ public class ReportCommand implements ICommand {
         EmbedBuilder embedBuilder = new EmbedBuilder();
 
         String link = args.get(0).getAsString();
-        if (!link.startsWith("http://") && !link.startsWith("https://")) {
+
+        try {
+            URL url = new URL(link);
+        } catch(MalformedURLException exception) {
             ErrorEmbed.sendError(context.getEvent(), ErrorType.COMMAND_INVALID_URL);
             return;
         }
