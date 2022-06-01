@@ -68,7 +68,7 @@ public class GuildMessageReceivedListener extends ListenerAdapter {
                             ErrorEmbed.sendError(event.getChannel(), ErrorType.PERMISSION_MANAGE_MESSAGES);
                         }
 
-                        embedBuilder.setTitle(":warning: **Scam Link Detection:**");
+                        embedBuilder.setTitle(":warning: **Scam Link Detection**");
                         embedBuilder.setDescription("A message was flagged as scam and removed from a server.```" + rawMessage + "```");
                         User user = Main.getBot().getJDA().getUserById(config.getString("user.admin"));
                         if (user != null)
@@ -96,7 +96,7 @@ public class GuildMessageReceivedListener extends ListenerAdapter {
                             ErrorEmbed.sendError(event.getChannel(), ErrorType.PERMISSION_MANAGE_MESSAGES);
                         }
 
-                        embedBuilder.setTitle(":warning: **Scam Link Detection:**");
+                        embedBuilder.setTitle(":warning: **Scam Link Detection**");
                         embedBuilder.setDescription("A message was flagged as scam and removed from a server.```" + rawMessage + "```");
                         User user = Main.getBot().getJDA().getUserById(config.getString("user.admin"));
                         if (user != null)

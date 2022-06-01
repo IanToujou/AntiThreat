@@ -21,10 +21,12 @@
 
 ### Install
 
-1. Invite the Discord Bot by clicking *[here](https://discord.com/api/oauth2/authorize?client_id=938195003631628320&permissions=10240&scope=bot%20applications.commands)*.
+1. Invite the Discord Bot by
+   clicking *[here](https://discord.com/api/oauth2/authorize?client_id=938195003631628320&permissions=10240&scope=bot%20applications.commands)*
+   .
 2. Stay safe!
 
 ## Support
 
-If you have any questions or problems regarding this project, you can reach me
-via any linked social media account on my profile *([https://github.com/IanToujou](https://github.com/IanToujou))*.
+If you have any questions or problems regarding this project, you can reach me via any linked social media account on my
+profile *([https://github.com/IanToujou](https://github.com/IanToujou))*.
